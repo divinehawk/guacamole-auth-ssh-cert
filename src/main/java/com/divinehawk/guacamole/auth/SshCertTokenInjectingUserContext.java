@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,9 +13,6 @@ import org.apache.guacamole.form.Form;
 import org.apache.guacamole.form.TextField;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Connection;
-import org.apache.guacamole.net.auth.DelegatingConnection;
-import org.apache.guacamole.net.auth.DelegatingDirectory;
-import org.apache.guacamole.net.auth.Directory;
 import org.apache.guacamole.net.auth.TokenInjectingUserContext;
 import org.apache.guacamole.net.auth.UserContext;
 import org.slf4j.Logger;
@@ -89,49 +84,6 @@ public class SshCertTokenInjectingUserContext extends TokenInjectingUserContext 
         forms.add(new Form("ssh-cert",
                 Arrays.asList(new TextField(CONNECTION_PRINCIPALS))));
         return forms;
-    }
-
-    /**
-     * Wraps a connection so that CONNECTION_PRINCIPALS is always present in
-     * the attributes map (defaulting to null if unset in the DB), forcing the
-     * Guacamole frontend to render the field on existing connection edit pages.
-     */
-    private Connection wrapConnection(Connection connection) {
-        return new DelegatingConnection(connection) {
-
-            @Override
-            public Map<String, String> getAttributes() {
-                Map<String, String> attributes = new HashMap<>(super.getAttributes());
-                // Ensure key is present so Guacamole UI renders the field on existing connections
-                attributes.putIfAbsent(CONNECTION_PRINCIPALS, null);
-                return attributes;
-            }
-
-        };
-    }
-
-    @Override
-    public Directory<Connection> getConnectionDirectory() throws GuacamoleException {
-        return new DelegatingDirectory<Connection>(super.getConnectionDirectory()) {
-
-            @Override
-            public Connection get(String identifier) throws GuacamoleException {
-                Connection connection = super.get(identifier);
-                return (connection != null) ? wrapConnection(connection) : null;
-            }
-
-            @Override
-            public Collection<Connection> getAll(Collection<String> identifiers)
-                    throws GuacamoleException {
-                Collection<Connection> connections = super.getAll(identifiers);
-                List<Connection> wrapped = new ArrayList<>(connections.size());
-                for (Connection connection : connections) {
-                    wrapped.add(wrapConnection(connection));
-                }
-                return wrapped;
-            }
-
-        };
     }
 
     /**
