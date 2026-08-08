@@ -120,6 +120,9 @@ public class SshCertTokenInjectingUserContext extends TokenInjectingUserContext 
         SshCertCredential credential =
                 provisioner.provision(identity, new ArrayList<>(principals));
 
+//        logger.debug("SSH_CERT_PRIVATE_KEY: {}", credential.getPrivateKey());
+//        logger.debug("SSH_CERT_CERTIFICATE {}", credential.getCertificate());
+
         tokens.put("SSH_CERT_USERNAME", identity);
         tokens.put("SSH_CERT_PRIVATE_KEY", credential.getPrivateKey());
         tokens.put("SSH_CERT_CERTIFICATE", credential.getCertificate());
