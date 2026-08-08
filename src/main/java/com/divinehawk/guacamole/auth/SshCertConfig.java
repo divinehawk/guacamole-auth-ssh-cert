@@ -27,7 +27,7 @@ public class SshCertConfig {
         String caKeyPath = environment.getRequiredProperty(CA_KEY_PATH);
         int certTtlSeconds = environment.getProperty(CERT_TTL_SECONDS, 300);
         String principalsFile = environment.getProperty(PRINCIPALS_FILE, null);
-        String KeyType = environment.getProperty(SSH_CERT_KEY_TYPE, null);
+        String KeyType = environment.getProperty(CERT_KEY_TYPE, null);
 
         this.caKeyManager = new CaKeyManager(caKeyPath);
         this.provisioner = new SshCertProvisioner(caKeyManager, certTtlSeconds, KeyType);

@@ -29,14 +29,14 @@ public class SshCertProperties {
     public static final IntegerGuacamoleProperty CERT_TTL_SECONDS =
         new IntegerGuacamoleProperty() {
             @Override
-            public String getName() { return "ssh-cert-cert-ttl-seconds"; }
+            public String getName() { return "ssh-cert-ttl-seconds"; }
         };
 
     /**
      * OpenSSH key type to use for ephemeral user keys -- "ssh-ed25519" or
      * "ssh-rsa". Defaults to "ssh-ed25519".
      */
-    public static final StringGuacamoleProperty SSH_CERT_KEY_TYPE =
+    public static final StringGuacamoleProperty CERT_KEY_TYPE =
         new StringGuacamoleProperty() {
             @Override
             public String getName() { return "ssh-cert-key-type"; }

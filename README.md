@@ -35,3 +35,6 @@ ssh-cert-ttl-seconds: 300
 
 # Mapping file for identity-to-principal translation (optional)
 ssh-cert-principals-file: /etc/guacamole/ssh-principals.conf
+
+# Key type ssh-ed25519 or ssh-rsa (optional)
+ssh-cert-key-type: ssh-ed25519
