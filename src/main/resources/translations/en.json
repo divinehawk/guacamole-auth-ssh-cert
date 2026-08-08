@@ -1,0 +1,6 @@
+{
+    "CONNECTION_ATTRIBUTES" : {
+        "SECTION_HEADER_SSH_CERT" : "Ephemeral SSH Certificate",
+        "FIELD_HEADER_SSH_CERT_PRINCIPALS" : "Additional Principals (comma-separated)"
+    }
+}

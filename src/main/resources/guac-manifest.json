@@ -1,0 +1,11 @@
+{
+    "guacamoleVersion" : "1.6.0",
+    "name"             : "SSH Certificate Authentication",
+    "namespace"        : "ssh-cert",
+    "authProviders"    : [
+        "com.divinehawk.guacamole.auth.SshCertAuthenticationProvider"
+    ],
+    "translations"     : [
+        "translations/en.json"
+    ]
+}

@@ -1,0 +1,17 @@
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# IDEs & Editors
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Build & OS Artifacts
+*.jar
+*.tar.gz
+*.zip
+.DS_Store
