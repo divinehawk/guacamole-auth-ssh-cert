@@ -8,7 +8,6 @@ An Apache Guacamole extension that automatically signs and injects short-lived, 
 
 - **Per-Connect Provisioning:** Generates fresh Ed25519 key pairs and OpenSSH user certificates dynamically on every `connect()` call rather than once per login.
 - **Pure Java Signing:** Operates entirely in-process using native JDK cryptography and Apache MINA SSHD without shelling out to `ssh-keygen`.
-- **CA Validation:** Automatically verifies the CA private key against its corresponding public key at startup to prevent misconfigurations.
 - **UI Integration:** Dynamically injects an *Additional Principals* field into connection management pages across both new and existing database-backed connections.
 
 ---
