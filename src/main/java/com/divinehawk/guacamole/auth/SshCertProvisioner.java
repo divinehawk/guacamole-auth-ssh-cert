@@ -1,7 +1,6 @@
 package com.divinehawk.guacamole.auth;
 
 import java.io.ByteArrayOutputStream;
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.KeyPair;
@@ -55,10 +54,10 @@ public class SshCertProvisioner {
 
     private final CaKeyManager caKeyManager;
     private final int certTtlSeconds;
-    private final String KeyType;
+    private final String keyType;
 
     /**
-     * @param KeyType
+     * @param keyType
      *     The OpenSSH type name to use for every ephemeral user key this
      *     provisioner generates -- e.g. {@link KeyPairProvider#SSH_RSA} or
      *     {@link KeyPairProvider#SSH_ED25519}. Fixed per-provisioner
@@ -66,10 +65,10 @@ public class SshCertProvisioner {
      *     both types.
      */
     public SshCertProvisioner(CaKeyManager caKeyManager, int certTtlSeconds,
-            String KeyType) {
+            String keyType) {
         this.caKeyManager = caKeyManager;
         this.certTtlSeconds = certTtlSeconds;
-        this.KeyType = validateKeyType(KeyType);
+        this.keyType = validateKeyType(keyType);
     }
 
     private static String validateKeyType(String keyType) {
@@ -103,8 +102,6 @@ public class SshCertProvisioner {
      */
     public SshCertCredential provision(String keyId, List<String> principals)
             throws GuacamoleException {
-
-        String keyType = KeyType;
 
         if (principals == null || principals.isEmpty()) {
             throw new GuacamoleServerException(
